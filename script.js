@@ -4,8 +4,8 @@ window.addEventListener("load", function () {
    form.addEventListener("submit", function () {
       let pilotNameInput = document.querySelector("input[name=pilotName]");
       let coPilotNameInput = document.querySelector("input[name=copilotName]");
-      let fuelLevelInput = document.querySelector("input[name=fuelLevel");
-      let cargoMassInput = document.querySelector("input[name=cargoMass");
+      let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
+      let cargoMassInput = document.querySelector("input[name=cargoMass]");
       let inputArray = [pilotNameInput.value, coPilotNameInput.value, fuelLevelInput.value, cargoMassInput.value];
       for (let i = 0; i <= inputArray.length; i++) {
          if (inputArray[i] === "") {
@@ -43,24 +43,28 @@ window.addEventListener("load", function () {
          fuelStatus.innerHTML = "Fuel level too low for launch!";
          launchStatus.innerHTML = "Shuttle not Ready for launch!";
          launchStatus.style.color = "red";
+      } else {
+         launchStatus.innerHTML = "Shuttle Ready for Launch!";
+         launchStatus.style.color = "green";
       }
 
       if (cargoMassInput.value > 10000) {
          cargoStatus.innerHTML = "Cargo mass too high for launch!";
          launchStatus.innerHTML = "Shuttle not Ready for launch!";
          launchStatus.style.color = "red";
+      } else {
+         launchStatus.innerHTML = "Shuttle Ready for Launch!";
+         launchStatus.style.color = "green";
       }
 
-      launchStatus.innerHTML = "Shuttle Ready for Launch!";
-      launchStatus.style.color = "green";
-
-      fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
-         response.json()
-            .then(function (json) {
-               let randomNumber = Math.floor(Math.random() * 6);
-               let destination = json[randomNumber];
-               let missionTarget = document.getElementById("missionTarget");
-               missionTarget.innerHTML = `<h2>Mission Destination</h2>
+   });
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
+      response.json()
+         .then(function (json) {
+            let randomNumber = Math.floor(Math.random() * 6);
+            let destination = json[randomNumber];
+            let missionTarget = document.getElementById("missionTarget");
+            missionTarget.innerHTML = `<h2>Mission Destination</h2>
             <ol>
                <li>Name: ${destination.name}</li>
                <li>Diameter: ${destination.diameter}</li>
@@ -69,8 +73,7 @@ window.addEventListener("load", function () {
                <li>Number of Moons: ${destination.moons}</li>
             </ol>
             <img src="${destination.image}">`
-            });
-      });
+         });
    });
 });
 
