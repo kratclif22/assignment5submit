@@ -34,7 +34,6 @@ window.addEventListener("load", function () {
       let cargoStatus = document.getElementById("cargoStatus");
 
       faultyItems.style.visibility = "visible";
-      event.preventDefault();
 
       pilotStatus.innerHTML = `${pilotNameInput.value} Ready`;
       copilotStatus.innerHTML = `${coPilotNameInput.value} Ready`;
@@ -58,6 +57,7 @@ window.addEventListener("load", function () {
          launchStatus.innerHTML = "Shuttle Ready for Launch!";
          launchStatus.style.color = "green";
       }
+      event.preventDefault();
    });
    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
       response.json()
